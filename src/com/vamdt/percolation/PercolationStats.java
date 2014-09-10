@@ -59,11 +59,14 @@ public class PercolationStats {
         return mean() + ( ( 1.96 * stddev() ) / Math.sqrt(thresholds.length) );
     }
 
+    /**
+     * test client
+     */
     public static void main(String[] args) {
         PercolationStats ps = new PercolationStats(200, 100);
         StdOut.println(ps.mean());
         StdOut.println(ps.stddev());
         StdOut.println(ps.confidenceLo());
         StdOut.println(ps.confidenceHi());
-    }   // test client, described below
+    }
 }
