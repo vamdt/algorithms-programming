@@ -23,10 +23,15 @@ public class Percolation {
         }
     }
 
-    // open site (row i, column j) if it is not already
+    /**
+     *  open site (row i, column j) if it is not already
+     */
     public void open(int i, int j) {
         if (i>=grids.length || i<1 || j>=grids.length || j<1) {
             throw new IndexOutOfBoundsException();
+        }
+        if(grids[i][j] == 1) {
+            return;
         }
         grids[i][j] = 1;
         if (i>=1 && i<grids.length-1 && isOpen(i+1, j)) {
@@ -45,12 +50,25 @@ public class Percolation {
             uf.union(xyTo1D(i,j), xyTo1D(i, j-1));
         }
     }
+
+    public int openedCount()  {
+        int count = 0;
+        for (int i=1; i< grids.length; i++) {
+            for (int j=1; j<grids.length; j++) {
+                if ( isOpen(i, j) ) {
+                    count++ ;
+                }
+            }
+        }
+        return count;
+    }
+
     public boolean isOpen(int i, int j) {
         if (i>=grids.length || i<1 || j>=grids.length || j<1) {
             throw new IndexOutOfBoundsException();
         }
         return grids[i][j] == 1;
-    }      // is site (row i, column j) open?
+    }
 
     public boolean isFull(int i, int j) {
         if (i>=grids.length || i<1 || j>=grids.length || j<1) {
@@ -64,21 +82,22 @@ public class Percolation {
         } else {
             return false;
         }
-    }      // is site (row i, column j) full?
+    }
     public boolean percolates()  {
         return uf.connected( (grids.length-1) * (grids.length-1), (grids.length-1)*(grids.length-1)+1 );
-    }            // does the system percolate?
-    public static void main(String[] args) {
-
-//        Percolation p = new Percolation(20);
-//        p.open(1,1);
-//        p.open(2,1);
-//        StdOut.println( p.uf.connected( p.xyTo1D(1,1), p.xyTo1D(2,1) ) );
-
-    }   // test client, optional
+    }
 
     private int xyTo1D(int x, int y) {
         int length = grids.length-1;
         return (x-1) * length + y-1;
     }
+
+    public static void main(String[] args) {
+        Percolation p = new Percolation(20);
+        p.open(1,1);
+        p.open(2,1);
+        StdOut.println( p.uf.connected( p.xyTo1D(1,1), p.xyTo1D(2,1) ) );
+
+    }
+
 }
