@@ -68,6 +68,7 @@ public class PercolationVisualizer {
 
         // repeatedly read in sites to open and draw resulting system
         Percolation perc = new Percolation(N);
+        StdOut.println(perc.percolates());
         draw(perc, N);
         StdDraw.show(DELAY);
         while (!in.isEmpty()) {
