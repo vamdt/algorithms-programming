@@ -1,9 +1,3 @@
-package com.vamdt.percolation;
-
-import edu.princeton.cs.introcs.StdOut;
-import edu.princeton.cs.introcs.StdRandom;
-import edu.princeton.cs.introcs.StdStats;
-
 public class PercolationStats {
 
     private double[] thresholds = null;

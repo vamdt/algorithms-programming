@@ -1,7 +1,5 @@
-package com.vamdt.percolation;
+//package com.vamdt.percolation;
 
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import edu.princeton.cs.introcs.StdOut;
 
 public class Percolation {
 

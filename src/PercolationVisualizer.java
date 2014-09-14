@@ -1,4 +1,4 @@
-package com.vamdt.percolation; /****************************************************************************
+/****************************************************************************
  *  Compilation:  javac PercolationVisualizer.java
  *  Execution:    java PercolationVisualizer input.txt
  *  Dependencies: Percolation.java StdDraw.java In.java
@@ -17,7 +17,6 @@ package com.vamdt.percolation; /************************************************
  ****************************************************************************/
 
 import java.awt.Font;
-import edu.princeton.cs.introcs.*;
 
 public class PercolationVisualizer {
 

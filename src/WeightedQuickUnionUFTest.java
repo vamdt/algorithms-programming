@@ -1,9 +1,3 @@
-package com.vamdt.uf;
-
-import edu.princeton.cs.algs4.QuickFindUF;
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import edu.princeton.cs.introcs.StdOut;
-
 import java.lang.reflect.Field;
 
 /**
@@ -11,7 +5,7 @@ import java.lang.reflect.Field;
  */
 public class WeightedQuickUnionUFTest {
     public static void main(String[] args) throws Exception {
-        int N =10;
+        int N = 10;
         WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N);
         //   8-0 3-2 5-0 4-9 9-2 7-5 5-6 8-9 9-1
         //
@@ -40,13 +34,14 @@ public class WeightedQuickUnionUFTest {
     }
 
     public  static  void printAll(WeightedQuickUnionUF obj) throws Exception {
-        Class kls = obj.getClass();
-        Field f = kls.getDeclaredField("id");
-        f.setAccessible(true);
-        int[] sd = (int[]) f.get(obj);
-        for (int i=0; i<sd.length; i++) {
-            StdOut.print(sd[i]);
-            StdOut.print(" ");
-        }
+//        Class kls;
+//        kls = obj.getClass();
+//        Field f = kls.getDeclaredField("id");
+//        f.setAccessible(true);
+//        int[] sd = (int[]) f.get(obj);
+//        for (int i = 0; i < sd.length; i++) {
+//            StdOut.print(sd[i]);
+//            StdOut.print(" ");
+//        }
     }
 }
