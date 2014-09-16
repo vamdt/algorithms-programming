@@ -10,6 +10,13 @@ public class Deque<Item> implements Iterable<Item> {
         private Item item;
         private Node prev;
         private Node next;
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "item=" + item +
+                    '}';
+        }
     }
 
     public Deque() {
@@ -20,7 +27,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // is the deque empty?
     public boolean isEmpty() {
-        return first == null || last == null;
+        return N == 0;
     }
 
     // return the number of items on the deque
@@ -47,6 +54,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (item == null) throw new NullPointerException();
         Node oldLast = last;
         last = new Node();
+        last.item = item;
         if (!isEmpty()) {
             last.prev = oldLast;
             oldLast.next = last;
@@ -60,8 +68,10 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException();
         Item item = first.item;
         first = first.next;
-        first.prev.next = null;
-        first.prev = null;
+        if (first != null) {
+            first.prev.next = null;
+            first.prev = null;
+        }
         N--;
         return item;
     }
@@ -71,8 +81,10 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException();
         Item item = last.item;
         last = last.prev;
-        last.next.prev = null;
-        last.next = null;
+        if (last != null) {
+            last.next.prev = null;
+            last.next = null;
+        }
         N--;
         return item;
     }
@@ -108,6 +120,24 @@ public class Deque<Item> implements Iterable<Item> {
         d.addFirst(9);
         d.addLast(12);
         d.addLast(15);
+        iter(d.iterator());
+        d.removeFirst();
+        iter(d.iterator());
+        d.removeLast();
+        iter(d.iterator());
+        d.removeLast();
+        iter(d.iterator());
+        d.removeFirst();
+        iter(d.iterator());
+    }
+
+    private static void iter(Iterator<Integer> i) {
+        while (i.hasNext()) {
+            Integer num = i.next();
+            StdOut.print(num);
+            StdOut.print(' ');
+        }
+        StdOut.println();
     }
 
 }
