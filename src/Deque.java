@@ -120,24 +120,24 @@ public class Deque<Item> implements Iterable<Item> {
         d.addFirst(9);
         d.addLast(12);
         d.addLast(15);
-        iter(d.iterator());
+//        iter(d.iterator());
         d.removeFirst();
-        iter(d.iterator());
+//        iter(d.iterator());
         d.removeLast();
-        iter(d.iterator());
+//        iter(d.iterator());
         d.removeLast();
-        iter(d.iterator());
+//        iter(d.iterator());
         d.removeFirst();
-        iter(d.iterator());
+//        iter(d.iterator());
     }
 
     private static void iter(Iterator<Integer> i) {
-        while (i.hasNext()) {
-            Integer num = i.next();
-            StdOut.print(num);
-            StdOut.print(' ');
-        }
-        StdOut.println();
+//        while (i.hasNext()) {
+//            Integer num = (Integer)i.next();
+//            StdOut.print(num);
+//            StdOut.print(' ');
+//        }
+//        StdOut.println();
     }
 
 }
