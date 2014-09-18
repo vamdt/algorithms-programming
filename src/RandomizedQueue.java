@@ -25,7 +25,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resize(int max) {
         Item[] temp = (Item[]) new Object[max];
         for (int i = 0; i < N; i++) {
-            temp[i] = q[(first + i) % q.length];
+            temp[i] = q[i];
         }
         q = temp;
     }

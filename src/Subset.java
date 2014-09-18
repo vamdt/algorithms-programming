@@ -1,13 +1,13 @@
 public class Subset {
     public static void main(String[] args) {
         RandomizedQueue<String> q = new RandomizedQueue<String>();
-        StdOut.println(args[0]);
         int limit = Integer.parseInt(args[0]);
-        for (String s = StdIn.readString(); !s.isEmpty(); ) {
+        String s = StdIn.isEmpty() ? "" : StdIn.readString();
+        for (; !StdIn.isEmpty(); s = StdIn.readString() ) {
             q.enqueue(s);
         }
-        for (String s : q) {
-            StdOut.println(s);
+        for (int i =0 ;i<limit; i++) {
+            StdOut.println(q.dequeue());
         }
     }
 }
