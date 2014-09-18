@@ -13,9 +13,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "item=" + item +
-                    '}';
+            return "Node{" + "item=" + item + '}';
         }
     }
 
@@ -120,24 +118,10 @@ public class Deque<Item> implements Iterable<Item> {
         d.addFirst(9);
         d.addLast(12);
         d.addLast(15);
-        iter(d.iterator());
         d.removeFirst();
-        iter(d.iterator());
         d.removeLast();
-        iter(d.iterator());
         d.removeLast();
-        iter(d.iterator());
         d.removeFirst();
-        iter(d.iterator());
-    }
-
-    private static void iter(Iterator<Integer> i) {
-        while (i.hasNext()) {
-            Integer num = i.next();
-            StdOut.print(num);
-            StdOut.print(' ');
-        }
-        StdOut.println();
     }
 
 }

@@ -92,7 +92,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         StdOut.println(q.sample());
         StdOut.println(q.sample());
         StdOut.println("-----------------");
-        for (Integer i : q) {
+        for (int i : q) {
             StdOut.println(i);
         }
         StdOut.println("-----------------");

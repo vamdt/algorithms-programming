@@ -3,10 +3,10 @@ public class Subset {
         RandomizedQueue<String> q = new RandomizedQueue<String>();
         int limit = Integer.parseInt(args[0]);
         String s = StdIn.isEmpty() ? "" : StdIn.readString();
-        for (; !StdIn.isEmpty(); s = StdIn.readString() ) {
+        for (; !StdIn.isEmpty(); s = StdIn.readString()) {
             q.enqueue(s);
         }
-        for (int i =0 ;i<limit; i++) {
+        for (int i = 0; i < limit; i++) {
             StdOut.println(q.dequeue());
         }
     }
