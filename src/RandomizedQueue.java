@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] q;
     private int N = 0;
-    private int first = 0;
 
     public RandomizedQueue() {
         q = (Item[]) new Object[2];
@@ -19,8 +18,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
         if (N == q.length) resize(q.length*2);
-        q[first++] = item;
-        N++;
+        q[N++] = item;
     }
 
     private void resize(int max) {
@@ -88,6 +86,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         q.enqueue(new Integer(4));
         q.enqueue(new Integer(5));
         q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
         StdOut.println("-----------------");
         StdOut.println(q.sample());
         StdOut.println(q.sample());
@@ -101,5 +106,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         StdOut.println(q.dequeue());
         StdOut.println(q.dequeue());
         StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        StdOut.println(q.dequeue());
+        q.enqueue(new Integer(3));
+        q.enqueue(new Integer(4));
+        q.enqueue(new Integer(5));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
+        q.enqueue(new Integer(9));
     }
 }

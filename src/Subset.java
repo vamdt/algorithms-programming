@@ -2,7 +2,8 @@ public class Subset {
     public static void main(String[] args) {
         RandomizedQueue<String> q = new RandomizedQueue<String>();
         int limit = Integer.parseInt(args[0]);
-        String s = StdIn.isEmpty() ? "" : StdIn.readString();
+        String s = "";
+        if (!StdIn.isEmpty()) s = StdIn.readString();
         for (; !StdIn.isEmpty(); s = StdIn.readString()) {
             q.enqueue(s);
         }
