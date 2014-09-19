@@ -12,8 +12,9 @@ public class Deque<Item> implements Iterable<Item> {
         private Node next;
 
         public void reset() {
-            this.item  =  null;
-            this.prev = this.next = null;
+            this.item = null;
+            this.prev = null;
+            this.next = null;
         }
         @Override
         public String toString() {
