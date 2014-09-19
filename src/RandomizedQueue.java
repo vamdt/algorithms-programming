@@ -17,7 +17,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // add the item
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException();
-        if (N == q.length) resize(q.length*2);
+        if (N >= q.length) resize(q.length*2);
         q[N++] = item;
     }
 
@@ -40,8 +40,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (N > 0 && 4*N < q.length) resize(q.length / 2);           // wrap-around
         return item;
     }
+
     // return (but do not delete) a random item
     public Item sample() {
+        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         return q[StdRandom.uniform(N)];
     }
     // return an independent iterator over items in random order

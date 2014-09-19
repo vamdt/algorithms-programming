@@ -118,6 +118,11 @@ public class Deque<Item> implements Iterable<Item> {
         d.addFirst(9);
         d.addLast(12);
         d.addLast(15);
+        d.addLast(15);
+        d.addLast(15);
+        d.addLast(15);
+        d.addLast(15);
+        d.addLast(15);
         d.removeFirst();
         d.removeLast();
         d.removeLast();
