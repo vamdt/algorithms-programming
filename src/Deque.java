@@ -11,6 +11,10 @@ public class Deque<Item> implements Iterable<Item> {
         private Node prev;
         private Node next;
 
+        public void reset() {
+            this.item  =  null;
+            this.prev = this.next = null;
+        }
         @Override
         public String toString() {
             return "Node{" + "item=" + item + '}';
@@ -65,10 +69,13 @@ public class Deque<Item> implements Iterable<Item> {
     public Item removeFirst() {
         if (isEmpty()) throw new NoSuchElementException();
         Item item = first.item;
-        first = first.next;
+        Node next = first.next;
+        first.reset();
+        first = next;
         if (first != null) {
-            first.prev.next = null;
             first.prev = null;
+        } else {
+            last = null;
         }
         N--;
         return item;
@@ -78,10 +85,13 @@ public class Deque<Item> implements Iterable<Item> {
     public Item removeLast() {
         if (isEmpty()) throw new NoSuchElementException();
         Item item = last.item;
-        last = last.prev;
+        Node prev = last.prev;
+        last.reset();
+        last = prev;
         if (last != null) {
-            last.next.prev = null;
             last.next = null;
+        } else {
+            first = null;
         }
         N--;
         return item;
