@@ -19,7 +19,40 @@ public class SortTest {
                 StdOut.print(' ');
             }
         }
+        StdOut.println();
+        int[] b = new int[] {26, 27, 17, 45, 87, 19, 92, 29, 86, 60, 10, 51};
+        partition(b);
+
     }
+
+    public static void partition(int[] arr) {
+        int i, j, lo, hi;
+        lo = i = 0;
+        hi = arr.length - 1;
+        j = hi + 1;
+        while (true) {
+            while (arr[++i] < arr[lo]) {
+                if (i == hi) break;
+            }
+            while (arr[lo] < arr[--j]) {
+                if (j == lo) break;
+            }
+
+            if (i >= j) break;
+            arr[i] ^= arr[j];
+            arr[j] ^= arr[i];
+            arr[i] ^= arr[j];
+        }
+
+        arr[lo] ^= arr[j];
+        arr[j] ^= arr[lo];
+        arr[lo] ^= arr[j];
+        for (int k = 0; k < arr.length; k++) {
+            StdOut.printf("%d ", arr[k]);
+        }
+    }
+
+
     public static void swap(int[] arr, int index, int min) {
         int temp = arr[index];
         arr[index] = arr[min];
