@@ -37,6 +37,7 @@ public class Brute {
                     for (l = k + 1; l < N; l++) {
                         if (collinear(points[i], points[j], points[k], points[l]))  {
                             drawLine(points[i], points[l]);
+                            puts(points[i],  points[j], points[j+1], points[j+2]);
                         }
                     }
                 }
@@ -44,6 +45,9 @@ public class Brute {
         }
     }
 
+    private static void puts(Point point, Point point1, Point point2, Point point3) {
+        StdOut.printf("%s -> %s -> %s -> %s\n", point, point1, point2, point3);
+    }
     private static void drawLine(Point fp, Point lp) {
         fp.drawTo(lp);
     }

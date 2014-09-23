@@ -26,18 +26,25 @@ public class Fast {
         StdDraw.setPenRadius();
     }
 
+
+
     private static void test(Point[] points) {
         Arrays.sort(points);
         for (int i = 0; i < points.length; i++) {
             Arrays.sort(points, i+1, points.length, points[i].SLOPE_ORDER);
             for (int j = i+1; j < points.length-2; j++) {
                 if (collinear(points[i],  points[j], points[j+1], points[j+2])) {
-                    drawLine(points[i], points[j+2]);
+                    drawLine(points[i], points[j + 2]);
+                    puts(points[i],  points[j], points[j+1], points[j+2]);
                 }
 
             }
             Arrays.sort(points);
         }
+    }
+
+    private static void puts(Point point, Point point1, Point point2, Point point3) {
+        StdOut.printf("%s -> %s -> %s -> %s\n", point, point1, point2, point3);
     }
 
 
