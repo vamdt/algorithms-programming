@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Brute {
 
     public static void main(String[] args) {
@@ -30,14 +28,14 @@ public class Brute {
 
         int i = 0, j = 0, k = 0, l = 0;
         int N = points.length;
-        Arrays.sort(points);
+        Quick.sort(points);
         for (; i < N; i++) {
             for (j = i + 1; j < N; j++) {
                 for (k = j + 1; k < N; k++) {
                     for (l = k + 1; l < N; l++) {
                         if (collinear(points[i], points[j], points[k], points[l]))  {
                             drawLine(points[i], points[l]);
-                            puts(points[i],  points[j], points[j+1], points[j+2]);
+                            puts(points[i],  points[j], points[k], points[l]);
                         }
                     }
                 }
@@ -53,6 +51,7 @@ public class Brute {
     }
 
     private static boolean collinear(Point fp, Point sp, Point tp, Point lp) {
-        return fp.slopeTo(sp) == fp.slopeTo(tp) && fp.slopeTo(sp) == fp.slopeTo(lp);
+        double slope = fp.slopeTo(sp);
+        return slope == fp.slopeTo(tp) && slope == fp.slopeTo(lp);
     }
 }

@@ -20,7 +20,6 @@ public class Fast {
             p.draw();
             points[i] = p;
         }
-        StdOut.println("--------");
         test(points);
         StdDraw.show(0);
         StdDraw.setPenRadius();

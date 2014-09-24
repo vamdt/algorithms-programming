@@ -66,10 +66,10 @@ public class Point implements Comparable<Point> {
     public int compareTo(Point that) {
         if ((this.y < that.y) || (this.y == that.y && this.x < that.x)) {
             return -1;
-        } else if (this.y == that.y && this.x == that.x) {
-            return 0;
-        } else {
+        } else if ((this.y > that.y) || (this.x > that.x)) {
             return 1;
+        } else {
+            return 0;
         }
     }
 
@@ -85,9 +85,9 @@ public class Point implements Comparable<Point> {
     public static void main(String[] args) {
         /* YOUR CODE HERE */
 
-        Point p= new Point(3, 2);
-        Point q= new Point(3, 8);
-        Point r= new Point(3, 4);
+        Point p = new Point(3, 2);
+        Point q = new Point(3, 8);
+        Point r = new Point(3, 4);
         StdOut.println(p.SLOPE_ORDER.compare(q, r));
         StdOut.println(p.slopeTo(q));
         StdOut.println(p.slopeTo(r));
