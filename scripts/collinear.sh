@@ -16,5 +16,5 @@ fi
 
 # pack three java files
 rm -f $TMP_PATH/collinear.zip
-zip $TMP_PATH/collinear.zip $SRC_PATH/Point.java $SRC_PATH/Brute.java $SRC_PATH/Fast.java
+zip -j $TMP_PATH/collinear.zip $SRC_PATH/Point.java $SRC_PATH/Brute.java $SRC_PATH/Fast.java
 
