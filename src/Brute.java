@@ -34,6 +34,7 @@ public class Brute {
                 for (k = j + 1; k < N; k++) {
                     for (l = k + 1; l < N; l++) {
                         if (collinear(points[i], points[j], points[k], points[l]))  {
+                            puts(points[i], points[j], points[k], points[l]);
                             drawLine(points[i], points[l]);
                         }
                     }
