@@ -11,6 +11,7 @@ public class Fast {
         String filename = args[0];
         In in = new In(filename);
         int N = in.readInt();
+        if (N < 4) return;
         Point[] points = new Point[N];
         for (int i = 0; i < N; i++) {
             int x = in.readInt();
