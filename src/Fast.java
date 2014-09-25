@@ -32,85 +32,46 @@ public class Fast {
 
         for (int i = 0; i < points.length; i++) {
             Arrays.sort(pointSlopes, points[i].SLOPE_ORDER);
-            findLines(pointSlopes);
-//            int m = 1, start = 0;
-//            double lastSlope = pointSlopes[0].slopeTo(pointSlopes[1]);
-//            for (int j = 2; j < pointSlopes.length; j++) { //point[i] == pointSlope[0]
-//                double slope = pointSlopes[0].slopeTo(pointSlopes[j]);
-//                if (slope == lastSlope) {
-//                    m++;
-//                } else {
-//                    if (m > 2) {
-//                        puts(pointSlopes, start, m);
-//                    }
-//                    start = j;
-//                    m = 1;
-//                }
-//                lastSlope = slope;
-//            }
-//            if (m > 2) {
-//                puts(pointSlopes, start, m);
-//            }
-        }
-    }
-
-    private static void findLines(Point[] points) {
-        Point[] lines = new Point[points.length];
-        lines[0] = points[0];
-        double previousSlope = points[0].slopeTo(points[1]);
-        int alignedPoints = 1;
-        int start = 1;
-        for (int i = 2; i < points.length; i++) {
-            double slope = points[0].slopeTo(points[i]);
-            if (slope == previousSlope) {
-//                lines[++alignedPoints] = points[i];
-                ++alignedPoints;
-            } else {
-                if (alignedPoints >= 3) {
-//                    showLine(lines, alignedPoints + 1);
-                    puts(points, start, alignedPoints);
+            int m = 1, start = 1;
+            double lastSlope = pointSlopes[0].slopeTo(pointSlopes[1]);
+            for (int j = 2; j < pointSlopes.length; j++) { //point[i] == pointSlope[0]
+                double slope = pointSlopes[0].slopeTo(pointSlopes[j]);
+                if (slope == lastSlope) {
+                    m++;
+                } else {
+                    if (m > 2) {
+                        puts(pointSlopes, start, m);
+                    }
+                    start = j;
+                    m = 1;
                 }
-                alignedPoints = 1;
-//                lines[1] = points[i];
-                start = i;
+                lastSlope = slope;
             }
-            previousSlope = slope;
-        }
-
-        if (alignedPoints >= 3) {
-//            showLine(lines, alignedPoints + 1);
-            puts(points, start, alignedPoints);
+            if (m > 2) {
+                puts(pointSlopes, start, m);
+            }
         }
     }
 
     private static void puts(Point[] points, int index, int length) {
-        Arrays.sort(points, index, index+length-1);
-        drawLine(points[index], points[index+length-1]);
-        StdOut.printf("%s ", points[0]);
-        for (int i = 0; i < length; i++) {
-            StdOut.printf("-> %s ", points[index+i]);
+        Point[] aps = new Point[length+1];
+        aps[0] = points[0];
+        for (int i = 1; i < aps.length; i++) {
+            aps[i] = points[index+i-1];
         }
-        StdOut.printf("\n");
-    }
+        Arrays.sort(aps, 1, length+1);
 
-    private static void showLine(Point[] lines, int size) {
-        Arrays.sort(lines, 1, size);
-        if (lines[0].compareTo(lines[1]) < 0) {
-            StdOut.printf("%s", lines[0]);
-            for (int k = 1; k < size; k++) {
-                Point point = lines[k];
-                StdOut.printf(" -> %s", point);
+        if (aps[0].compareTo(aps[1]) < 0) {
+            drawLine(aps[0], aps[length]);
+            StdOut.printf("%s ", aps[0]);
+            for (int i = 0; i < length; i++) {
+                StdOut.printf("-> %s ", aps[i+1]);
             }
-            StdOut.println();
-            lines[0].drawTo(lines[size - 1]);
+            StdOut.printf("\n");
         }
     }
 
     private static void drawLine(Point fp, Point lp) {
         fp.drawTo(lp);
-    }
-
-    private static boolean collinear(Point fp, Point sp, Point tp, Point lp) {
-        return fp.slopeTo(sp) == fp.slopeTo(tp) && fp.slopeTo(sp) == fp.slopeTo(lp);
     }
 }
