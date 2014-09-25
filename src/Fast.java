@@ -54,18 +54,12 @@ public class Fast {
     }
 
     private static void puts(Point[] points, int index, int length) {
-        Point[] aps = new Point[length+1];
-        aps[0] = points[0];
-        for (int i = 1; i < aps.length; i++) {
-            aps[i] = points[index+i-1];
-        }
-        Arrays.sort(aps, 1, length+1);
-
-        if (aps[0].compareTo(aps[1]) < 0) {
-            drawLine(aps[0], aps[length]);
-            StdOut.printf("%s ", aps[0]);
+        Arrays.sort(points, index, index + length);
+        if (points[0].compareTo(points[index]) < 0) {
+            drawLine(points[0], points[index + length -1]);
+            StdOut.printf("%s ", points[0]);
             for (int i = 0; i < length; i++) {
-                StdOut.printf("-> %s ", aps[i+1]);
+                StdOut.printf("-> %s ", points[index+i]);
             }
             StdOut.printf("\n");
         }
