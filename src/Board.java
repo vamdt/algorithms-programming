@@ -2,20 +2,21 @@ import java.util.Map;
 
 public class Board {
     private int[][] blocks;
+    private int N;
     // construct a board from an N-by-N array of blocks
     public Board(int[][] blocks) {
+        this.N = blocks.length;
         this.blocks = blocks;
     }
     // (where blocks[i][j] = block in row i, column j)
 
     // board dimension N
     public int dimension() {
-        return blocks.length * blocks.length;
+        return N;
     }
 
     // number of blocks out of place
     public int hamming() {
-        int N = blocks.length;
         int count = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -30,7 +31,6 @@ public class Board {
 
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
-        int N = blocks.length;
         int distances = 0;
         int deltaX, deltaY;
         for (int i = 0; i < N; i++) {
@@ -50,12 +50,22 @@ public class Board {
     }
     // a boadr that is obtained by exchanging two adjacent blocks in the same row
     public Board twin() {
-
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - 1; j++) {
+                if (blocks[i][j] != 0 && blocks[i][j+1] != 0) {
+                    int[][] bs = blocks.clone();
+                    bs[i][j] ^= bs[i][j+1];
+                    bs[i][j+1] ^= bs[i][j];
+                    bs[i][j] ^= bs[i][j+1];
+                    return new Board(bs);
+                }
+            }
+        }
+        return new Board(blocks);
     }
     // does this board equal y?
     public boolean equals(Object y) {
         Board board = (Board) y;
-        int N = blocks.length;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (blocks[i][j] != board.blocks[i][j]) {
@@ -69,13 +79,24 @@ public class Board {
     public Iterable<Board> neighbors() {
         Stack<Board> stack = new Stack<Board>();
     }
-    // string representation of this board (in the output format specified below)
-    public String toString() {
-
-    }
 
     // unit tests (not graded)
     public static void main(String[] args) {
 
+    }
+
+    /**
+     * string representation of this board (in the output format specified below)
+     */
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append(N + "\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                s.append(String.format("%2d ", tiles[i][j]));
+            }
+            s.append("\n");
+        }
+        return s.toString();
     }
 }
