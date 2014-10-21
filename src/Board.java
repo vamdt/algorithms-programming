@@ -1,5 +1,3 @@
-import java.util.Map;
-
 public class Board {
     private int[][] blocks;
     private int N;
@@ -63,9 +61,23 @@ public class Board {
         }
         return new Board(blocks);
     }
+
+    private Board swap(int i, int j, int a, int b) {
+        if (a < 0 || a >= N || b < 0 || b >= N) return null;
+        int[][] bs = blocks.clone();
+        bs[i][j] ^= bs[i][j+1];
+        bs[i][j+1] ^= bs[i][j];
+        bs[i][j] ^= bs[i][j+1];
+        return new Board(bs);
+    }
+
     // does this board equal y?
     public boolean equals(Object y) {
+        if (y == this) return true;
+        if (y == null) return false;
+        if (y.getClass() != this.getClass()) return false;
         Board board = (Board) y;
+        if (this.N != board.N) return false;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (blocks[i][j] != board.blocks[i][j]) {
@@ -77,7 +89,39 @@ public class Board {
     }
     // all neighboring boards
     public Iterable<Board> neighbors() {
+        int i0, j0;
+        int[] zeros = findZero();
+        i0 = zeros[0];
+        j0 = zeros[1];
+
         Stack<Board> stack = new Stack<Board>();
+
+        Board board = this.swap(i0, j0, i0-1, j0);
+        if (board != null) stack.push(board);
+
+        board = this.swap(i0, j0, i0+1, j0);
+        if (board != null) stack.push(board);
+
+        board = this.swap(i0, j0, i0, j0+1);
+        if (board != null) stack.push(board);
+
+        board = this.swap(i0, j0, i0, j0-1);
+        if (board != null) stack.push(board);
+        return  stack;
+    }
+
+    private int[] findZero() {
+        int[] ret = new int[2];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blocks[i][j] == 0) {
+                    ret[0] = i;
+                    ret[1] = j;
+                    return  ret;
+                }
+            }
+        }
+        return null;
     }
 
     // unit tests (not graded)
@@ -93,10 +137,11 @@ public class Board {
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                s.append(String.format("%2d ", tiles[i][j]));
+                s.append(String.format("%2d ", blocks[i][j]));
             }
             s.append("\n");
         }
         return s.toString();
     }
+
 }
