@@ -4,7 +4,7 @@ public class Board {
     // construct a board from an N-by-N array of blocks
     public Board(int[][] blocks) {
         this.N = blocks.length;
-        this.blocks = blocks;
+        this.blocks = copySquareArray(blocks);
     }
     // (where blocks[i][j] = block in row i, column j)
 
@@ -51,7 +51,7 @@ public class Board {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - 1; j++) {
                 if (blocks[i][j] != 0 && blocks[i][j+1] != 0) {
-                    int[][] bs = blocks.clone();
+                    int[][] bs = copySquareArray(blocks);
                     bs[i][j] ^= bs[i][j+1];
                     bs[i][j+1] ^= bs[i][j];
                     bs[i][j] ^= bs[i][j+1];
@@ -63,11 +63,12 @@ public class Board {
     }
 
     private Board swap(int i, int j, int a, int b) {
-        if (a < 0 || a >= N || b < 0 || b >= N) return null;
-        int[][] bs = blocks.clone();
-        bs[i][j] ^= bs[i][j+1];
-        bs[i][j+1] ^= bs[i][j];
-        bs[i][j] ^= bs[i][j+1];
+//        if (a < 0 || a >= N || b < 0 || b >= N) return null;
+//        int[][] bs = blocks.clone();
+        int[][] bs = copySquareArray(blocks);
+        int temp = bs[a][b];
+        bs[a][b] = bs[i][j];
+        bs[i][j] = temp;
         return new Board(bs);
     }
 
@@ -89,39 +90,46 @@ public class Board {
     }
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        int i0, j0;
-        int[] zeros = findZero();
-        i0 = zeros[0];
-        j0 = zeros[1];
-
-        Stack<Board> stack = new Stack<Board>();
-
-        Board board = this.swap(i0, j0, i0-1, j0);
-        if (board != null) stack.push(board);
-
-        board = this.swap(i0, j0, i0+1, j0);
-        if (board != null) stack.push(board);
-
-        board = this.swap(i0, j0, i0, j0+1);
-        if (board != null) stack.push(board);
-
-        board = this.swap(i0, j0, i0, j0-1);
-        if (board != null) stack.push(board);
-        return  stack;
-    }
-
-    private int[] findZero() {
-        int[] ret = new int[2];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (blocks[i][j] == 0) {
-                    ret[0] = i;
-                    ret[1] = j;
-                    return  ret;
+        int i0 = 0, j0 = 0;
+        zerosearch:
+        for (i0 = 0; i0 < N; i0++) {
+            for (j0 = 0; j0 < N; j0++) {
+                if (blocks[i0][j0] == 0) {
+                    break zerosearch;
                 }
             }
         }
-        return null;
+
+        Stack<Board> stack = new Stack<Board>();
+
+        if (i0 > 0) {
+            stack.push(this.swap(i0, j0, i0 - 1, j0));
+        }
+
+        if (j0 >  0) {
+            stack.push(this.swap(i0, j0, i0, j0 - 1));
+        }
+
+        if (i0 < N -1) {
+            stack.push(this.swap(i0, j0, i0 + 1, j0));
+        }
+
+        if (j0 < N -1) {
+            stack.push(this.swap(i0, j0, i0, j0 + 1));
+        }
+
+        return stack;
+    }
+
+    private int[][] copySquareArray(int[][] original) {
+        int len = original.length;
+        int[][] copy = new int[len][len];
+        for (int row = 0; row < len; row++) {
+            assert original[row].length == len;
+            for (int col = 0; col < len; col++)
+                copy[row][col] = (short) original[row][col];
+        }
+        return copy;
     }
 
     // unit tests (not graded)
