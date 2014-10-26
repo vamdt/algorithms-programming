@@ -51,11 +51,7 @@ public class Board {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N - 1; j++) {
                 if (blocks[i][j] != 0 && blocks[i][j+1] != 0) {
-                    int[][] bs = copySquareArray(blocks);
-                    bs[i][j] ^= bs[i][j+1];
-                    bs[i][j+1] ^= bs[i][j];
-                    bs[i][j] ^= bs[i][j+1];
-                    return new Board(bs);
+                    return swap(i, j, i, j+1);
                 }
             }
         }

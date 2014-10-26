@@ -31,6 +31,7 @@ public class Solver {
             return this.borad.manhattan() + this.moves - that.borad.manhattan() - that.moves;
         }
     }
+
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         MinPQ<SearchNode> queue = new MinPQ<SearchNode>();
@@ -51,6 +52,8 @@ public class Solver {
                     twinQueue.insert(new SearchNode(board, twinNode, twinNode.getMoves() + 1));
                 }
             }
+            node = queue.delMin();
+            twinNode = twinQueue.delMin();
         }
 
         if (node.getBorad().isGoal()) {
